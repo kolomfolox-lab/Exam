@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="bg-white p-4 rounded shadow-sm">
+            <h5 class="fw-bold mb-3">Категории</h5>
+            <a href="{% url 'product_list' %}" class="category-link {% if not category %}active-cat{% endif %}">
+                Все товары
+            </a>
+            {% for cat in categories %}
+                <a href="{% url 'product_list_by_category' cat.slug %}"
+                   class="category-link {% if category.slug == cat.slug %}active-cat{% endif %}">
+                    {{ cat.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="col-md-9">
+        <h2 class="mb-4 fw-bold">{% if category %}{{ category.name }}{% else %}Витрина{% endif %}</h2>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for product in products %}
+                <div class="col">
+                    <div class="card h-100 product-card shadow-sm">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" class="card-img-top" style="height: 200px; object-fit: cover;">
+                        {% else %}
+                            <div class="bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                                <span class="text-muted">Нет фото</span>
+                            </div>
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">{{ product.title }}</h5>
+                            <p class="price-tag mb-0">{{ product.price }} $</p>
+                        </div>
+                        <div class="card-footer bg-white border-0 pb-3">
+                            <a href="{% url 'product_detail' product.pk %}" class="btn btn-outline-dark w-100 rounded-pill">Просмотр</a>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12 mt-5 text-center">
+                    <h3>Пусто :(</h3>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
