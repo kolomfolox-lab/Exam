@@ -1,4 +1,5 @@
 # 🛒 Django Marketplace Engine
+#README.md Был создан Chatgpt.com
 
 ![Python](https://img.shields.io/badge/Python-3.9+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Django](https://img.shields.io/badge/Django-4.2+-092E20?style=for-the-badge&logo=django&logoColor=white)
